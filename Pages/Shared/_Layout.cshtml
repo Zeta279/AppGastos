@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - AppGastos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css"/>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a asp-page="/Index">
+                    <svg viewBox="0 0 16 16">
+                        <use xlink:href="img/house.svg"/>
+                    </svg>
+                    Principal
+                    </a>
+                </li>
+                <li>
+                    <a asp-page="/Ingresos/Index">
+                    <svg viewBox="0 0 16 16">
+                        <use xlink:href="img/dollar.svg"/>
+                    </svg>
+                    Ingresos
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - AppGastos</p>
+    </footer>
+
+    <script src="js/site.js"></script>
+
+    <script>
+        $(document).ready(function () {
+             
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

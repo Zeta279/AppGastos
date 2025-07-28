@@ -1,0 +1,510 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+    max-width: 1500px;
+    min-width: 800px;
+    margin: auto;
+    border-right: 1px lightgray solid;
+    border-left: 1px lightgray solid;
+    background-color: rgb(32, 32, 32);
+}
+
+nav{
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background-color: #0c2461;
+}
+
+li{
+    list-style: none;
+    border-bottom: 1px gray solid;
+}
+
+li:last-child{
+    border: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+nav a{
+    display: flex;
+    color: white;
+    font-size: bold;
+    padding: 20px;
+
+}
+
+nav a svg{
+    color: rgb(255, 255, 255);
+    width: 20px;
+    padding-right: 10px;
+}
+
+main{
+    margin-left: 200px;
+    min-width: 1100px;
+    background-color: white;
+    min-height: 100vh;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.section-main-index{
+    border: 1px rgb(180, 180, 180) solid;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: auto;
+    box-shadow: 0px 0px 10px lightgray;
+    font-family: "Inter";
+}
+
+.h1-main{
+    padding: 20px;
+    background-color: #1e3799;
+    color: white;
+    font-size: 22px;
+    font-weight: lighter;
+    border-radius: 10px 10px 0 0;
+}
+
+.section-main{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px;
+}
+
+.section-registro{
+    padding: 20px 50px;
+    text-align: center;
+    border: 1px rgb(180, 180, 180) solid;
+    border-radius: 10px;
+}
+
+.section-registro p{
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.section-registro p:nth-child(2){
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+h2{
+    font-size: 20px;
+}
+
+.h2-main{
+    margin: 20px;
+}
+
+.table-main{
+    border: 1px rgb(180, 180, 180) solid;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table-main tr{
+    border-bottom: 1px rgb(226, 226, 226) solid;
+}
+
+.table-main td{
+    padding: 15px 0;
+}
+
+.table-main tr:last-child{
+    border-bottom: 0;
+}
+
+.table-main th{
+    background-color: rgb(231, 231, 231);
+    padding: 10px 0;
+}
+
+#table-main-page{
+    margin: auto;
+    max-width: 700px;
+}
+
+.sin-ingresos{
+    text-align: center;
+}
+
+.boton{
+    background-color: #1e3799;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.3s background-color;
+    color: white;
+}
+
+.boton:hover{
+    background-color: #172a77;
+}
+
+.boton-ingresos{
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+    color: white;
+    width: fit-content;
+}
+
+input{
+    outline: none;
+}
+
+.nuevo-ingreso{
+    padding: 10px;
+    border-radius: 5px;
+    height: fit-content;
+    cursor: pointer;
+    display: flex;
+}
+
+.nuevo-ingreso a{
+    color: white;
+}
+
+.nuevo-ingreso svg{
+    color: white;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.fila-correo section{
+    background-color: rgb(250, 218, 9);
+    color: rgb(35, 48, 103);
+}
+
+.fila-andreani section{
+    background-color: rgb(223, 2, 9);
+    color: white;
+}
+
+.fila-correo section, .fila-andreani section{
+    border-radius: 15px;
+    padding: 10px;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.fila-correo img, .fila-andreani img{
+    height: fit-content;
+    display: inline-block;
+    width: 25px;
+}
+
+.fila-correo p, .fila-andreani p{
+    display: inline-block;
+    padding-right: 2px;
+}
+
+.ordenar{
+    display: flex;
+    justify-content: center;
+}
+
+.ordenar img{
+    margin: 0 5px;
+    width: 15px;
+    display: inline-block;
+}
+
+#orden{
+    margin-top: 20px;
+}
+
+.sec-ingresos-2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.section-ingresos{
+    padding: 30px;
+}
+
+#table-ingresos{
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 20px;
+}
+
+#table-ingresos tbody tr:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.table-fecha{
+    width: 10%;
+}
+
+.table-empresa{
+    width: 25%;
+}
+
+.table-tipo{
+    width: 5%;
+}
+
+.table-monto{
+    width: 15%;
+}
+
+.table-descripcion{
+    width: 25%;
+}
+
+.table-acciones{
+    width: 10%;
+}
+
+.desc-larga{
+    display: none;
+    overflow: hidden;
+}
+
+.ingreso-positivo{
+    color: green;
+}
+
+.ingreso-negativo{
+    color: red;
+}
+
+#form-buscar{
+    display: flex;
+    align-items: center;
+}
+
+#filtro{
+    padding: 8px;
+    margin: 0 10px;
+}
+
+#form-buscar input[type="text"]{
+    padding: 8px;
+    border: 0;
+}
+
+#input-busqueda{
+    border: 1px gray solid;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+    width: fit-content;
+}
+
+#buscar{
+    border: 0;
+    border-left: 1px gray solid;
+}
+
+#buscar:hover{
+    background-color: rgb(231, 231, 231);
+}
+
+#buscar img{
+    width: 20px;
+    padding: 0 10px;
+}
+
+#busqueda h3{
+    color: darkblue;
+    margin: 10px 0;
+}
+
+#busqueda a{
+    color: red;
+    display: block;
+    width: fit-content;
+    border: 1px red solid;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.sin-desc{
+    color: gray;
+}
+
+td img{
+    width: 20px;
+    margin: 0 10px;
+}
+
+#ingresar-form{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+#titulo-form{
+    margin-bottom: 20px;
+}
+
+#ingresar-form form{
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    background-color: white;
+    width: fit-content;
+    margin: 100px auto;
+    border-radius: 10px;
+}
+
+#ingresar-form input, #ingresar-form select, #ingresar-form textarea{
+    padding: 8px;
+    margin-top: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#ingresar-form textarea{
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    padding: 8px;
+}
+
+#input-monto{
+    display: flex;
+    align-items: center;
+    border: 1px gray solid;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0;
+    margin: 10px 0;
+}
+
+#input-monto input{
+    margin: 0;
+    border: 0;
+}
+
+#input-monto strong{
+    padding-left: 10px;
+}
+
+#boton-cerrar{
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px;
+    height: fit-content;
+    background-color: rgb(194, 0, 0);
+}
+
+#boton-cerrar:hover{
+    background-color: rgb(138, 0, 0);
+}
+
+#boton-ingresar{
+    background-color: green;
+    border: 0;
+    margin: 0 10px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+form #boton-ingresar{
+    padding: 10px;
+}
+
+#boton-ingresar:hover{
+    background-color: rgb(0, 95, 0);
+}
+
+#boton-editar{
+    background-color: rgb(49, 107, 216);
+    display: none;
+    border: 0;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+form #boton-editar{
+    padding: 10px;
+}
+
+#boton-editar:hover{
+    background-color: rgb(38, 83, 167);
+}
+
+#botones-ingreso-nuevo{
+    text-align: center;
+    padding-top: 30px;
+}
+
+#pedido-radio input{
+    margin-left: 10px;
+}
+
+.section-campos{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.section-campos label{
+    width: 40%;
+}
+
+.section-campos label input, .section-campos label select{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#boton-borrar{
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+#paginas{
+    display: flex;
+    width: fit-content;
+    justify-self: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.paginado{
+    border: 1px gray solid;
+    margin: 0;
+    width: 20px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 1500px;
+    padding: 20px;
+}
+
+footer p{
+    text-align: center;
+}

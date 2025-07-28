@@ -1,0 +1,294 @@
+﻿@page
+@model AppGastos.Pages.IndexIngresoModel
+@using AppGastos.Models
+@{
+    ViewData["Title"] = "Ingresos";
+}
+
+
+<section id="ingresar-form">
+    <form method="post">
+        <h2 id="titulo-form">Nuevo ingreso</h2>
+        <section class="section-campos">
+            <input type="hidden" id="id-ingreso" name="id" value="0">
+            <label for="fecha">Fecha
+                <input type="date" id="fecha" name="fecha" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+            </label>
+
+            <label for="tipo">Tipo
+                <select id="tipo" name="tipo" onchange="tipoCheck()">
+                    @foreach (var tipo in ViewData["Tipos"] as List<Tipo>)
+                    {
+                        <option value="@tipo.Id_tipo">@tipo.ToString()</option>
+                    }
+                </select>
+            </label>
+        </section>
+
+        <section class="section-campos">
+            <label for="empresa">Empresa
+                <select id="empresa" name="empresa">
+                    <option hidden value="">Ninguna</option>
+                    @foreach (var empresa in ViewData["Empresas"] as List<Empresa>)
+                    {
+                        <option value="@empresa.Id_empresa">@empresa.ToString()</option>
+                    }
+                </select>
+            </label>
+
+            <label for="monto">Monto
+                <section id="input-monto">
+                    <strong>$</strong><input type="number" id="monto" name="monto" value="25.2" step="0.01" min="-100000"
+                        pattern="^\d+(\.\d{1,2})?$" placeholder="Ingrese el monto" max="100000" required>
+                </section>
+            </label>
+        </section>
+
+        <label>Descripción (opcional, máx 100 caracteres)</label>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="50"
+            maxlength="100" placeholder="Ingrese una descripción"></textarea>
+        <section id="botones-ingreso-nuevo">
+            <a id="boton-cerrar" class="boton" href="#" onclick="ocultarIngresoNuevo()">Cerrar</a>
+            <input type="submit" id="boton-ingresar" class="boton" value="Ingresar">
+            <input type="submit" asp-page-handler="Editar" id="boton-editar" class="boton" value="Editar">
+        </section>
+    </form>
+</section>
+<section class="section-main-index">
+    <h1 class="h1-main">Ingresos</h1>
+    <section class="section-ingresos">
+        <section class="sec-ingresos-2">
+
+            <form method="get" id="form-buscar">
+                <label for="filtro">Buscar por: </label>
+                <select name="filtro" id="filtro">
+                    <option value="fecha">Fecha</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="monto">Monto</option>
+                    <option value="tipo">Tipo</option>
+                    <option value="descripcion">Descripción</option>
+                </select>
+                <section id="input-busqueda">
+                    <input type="text" name="busqueda" placeholder="Buscar ingresos..." />
+                    <button type="submit" id="buscar">
+                        <img src="img/search.svg"/>
+                    </button>
+                </section>
+            </form>
+
+            <section class="nuevo-ingreso boton" onclick="mostrarIngresoNuevo()">
+                <svg viewBox="0 0 16 16">
+                    <use xlink:href="img/plus.svg"/>
+                </svg>
+                <a>Nuevo ingreso</a>
+            </section>
+
+        </section>
+
+        <button id="probar">Probando</button>
+
+        @if(!String.IsNullOrEmpty(ViewData["Buscando"] as string))
+        {
+            <section id="busqueda">
+                <h3>Buscando: @ViewData["Buscando"]</h3>
+                <a asp-page="/Ingresos/Index">Cancelar búsqueda</a>
+            </section>
+        }
+
+        <section id="orden">
+            <p>Ordenando por: @ViewData["Orden"]</p>
+        </section>
+
+        <table id="table-ingresos" class="table-main">
+            <thead>
+                <tr>
+                    <th class="table-fecha">
+                        @if(String.IsNullOrEmpty(ViewData["Orden"] as string) || (ViewData["Orden"] as string) == "Fecha (descendente)")
+                        {
+                            <a href="?orden=FechaAsc" class="ordenar">Fecha <img src="img/arrow-down.svg"/></a>
+                        }
+                        else if((ViewData["Orden"] as string) == "Fecha (ascendente)")
+                        {
+                            <a href="?orden=FechaDesc" class="ordenar">Fecha <img src="img/arrow-up.svg"/></a>
+                        }
+                        else
+                        {
+                            <a href="?orden=FechaDesc" class="ordenar">Fecha</a>
+                        }
+                    </th>
+                    <th class="table-empresa">
+                        @if(!String.IsNullOrEmpty(ViewData["Orden"] as string))
+                        {
+                            @if((ViewData["Orden"] as string) == "Empresa (ascendente)")
+                            {
+                                <a href="?orden=EmpresaDesc" class="ordenar">Empresa <img src="img/arrow-up.svg"/></a>
+                            }
+                            else if((ViewData["Orden"] as string) == "Empresa (descendente)")
+                            {
+                                <a href="?orden=EmpresaAsc" class="ordenar">Empresa <img src="img/arrow-down.svg"/></a>
+                            }
+                            else
+                            {
+                                <a href="?orden=EmpresaDesc" class="ordenar">Empresa</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="?orden=EmpresaDesc" class="ordenar">Empresa</a>
+                        }
+                    </th>
+                    <th class="table-tipo">
+                        @if(!String.IsNullOrEmpty(ViewData["Orden"] as string))
+                        {
+                            @if((ViewData["Orden"] as string) == "Tipo (ascendente)")
+                            {
+                                <a href="?orden=TipoDesc" class="ordenar">Tipo <img src="img/arrow-up.svg"/></a>
+                            }
+                            else if((ViewData["Orden"] as string) == "Tipo (descendente)")
+                            {
+                                <a href="?orden=TipoAsc" class="ordenar">Tipo <img src="img/arrow-down.svg"/></a>
+                            }
+                            else
+                            {
+                                <a href="?orden=TipoDesc" class="ordenar">Tipo</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="?orden=TipoDesc" class="ordenar">Tipo</a>
+                        }
+                    </th>
+                    <th class="table-monto">
+                        @if(!String.IsNullOrEmpty(ViewData["Orden"] as string))
+                        {
+                            @if((ViewData["Orden"] as string) == "Monto (ascendente)")
+                            {
+                                <a href="?orden=MontoDesc" class="ordenar">Monto <img src="img/arrow-up.svg"/></a>
+                            }
+                            else if((ViewData["Orden"] as string) == "Monto (descendente)")
+                            {
+                                <a href="?orden=MontoAsc" class="ordenar">Monto <img src="img/arrow-down.svg"/></a>
+                            }
+                            else
+                            {
+                                <a href="?orden=MontoDesc" class="ordenar">Monto</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="?orden=MontoDesc" class="ordenar">Monto</a>
+                        }
+                    </th>
+                    <th class="table-descripcion">
+                        @if(!String.IsNullOrEmpty(ViewData["Orden"] as string))
+                        {
+                            @if((ViewData["Orden"] as string) == "Descripción (ascendente)")
+                            {
+                                <a href="?orden=DescripcionDesc" class="ordenar">Descripción <img src="img/arrow-up.svg"/></a>
+                            }
+                            else if((ViewData["Orden"] as string) == "Descripción (descendente)")
+                            {
+                                <a href="?orden=DescripcionAsc" class="ordenar">Descripción <img src="img/arrow-down.svg"/></a>
+                            }
+                            else
+                            {
+                                <a href="?orden=DescripcionDesc" class="ordenar">Descripción</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="?orden=DescripcionDesc" class="ordenar">Descripción</a>
+                        }
+                    </th>
+                    <th class="table-acciones">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ((ViewData["Ingresos"] is not null) && (ViewData["Ingresos"] as List<Ingreso>).Count > 0)
+                {
+                    @foreach (var ingreso in (ViewData["Ingresos"] as List<Ingreso>))
+                    {
+                        <tr id="ingreso-@ingreso.Id_ingreso" onclick="mostrarDesc('ingreso-@ingreso.Id_ingreso')">
+                            <td class="table-fecha">@ingreso.Fecha.ToShortDateString()</td>
+                            @if(ingreso.Empresa == null)
+                            {
+                                <td class="table-empresa">-</td>
+                            }
+                            else
+                            {
+                                @if(ingreso.Id_empresa == 1)
+                                {
+                                    <td class="fila-correo table-empresa">
+                                        <section>
+                                            <img src="img/correoarg.jpg">
+                                            <p>@ingreso.Empresa</p>
+                                        </section>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="fila-andreani table-empresa">
+                                        <section>
+                                            <img src="img/andreani.png">
+                                            <p>@ingreso.Empresa</p>
+                                        </section>
+                                    </td>
+                                }
+                            }
+                            <td class="table-tipo">@ingreso.Tipo</td>
+                            @if(ingreso.Monto > 0)
+                            {
+                                <td class="ingreso-positivo table-monto">+ @ingreso.Monto.ToString("C")</td>
+                            }
+                            else
+                            {
+                                <td class="ingreso-negativo table-monto">- @float.Abs(ingreso.Monto).ToString("C")</td>
+                            }
+                            <td class="table-descripcion">@if(ingreso.Descripcion == "")
+                                {
+                                    <i class="sin-desc">Sin descripción</i>
+                                }
+                                else
+                                {
+                                    <p class="desc-corta">@Model.Recortar(ingreso.Descripcion, 20)</p>
+                                    if(ingreso.Descripcion.Length > 20)
+                                    {
+                                        <p class="desc-larga">@ingreso.Descripcion</p>
+                                    }
+                                }
+                            </td>
+                            <td class="table-acciones">
+                                @if(ingreso.Empresa == null)
+                                {
+                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', null, @ingreso.Id_tipo, @ingreso.Monto, '@ingreso.Descripcion')"><img src="img/pen.svg"></a>
+                                }
+                                else
+                                {
+                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', @ingreso.Id_empresa, @ingreso.Id_tipo, @ingreso.Monto.ToString().Replace(",", "."), '@ingreso.Descripcion')"><img src="img/pen.svg"></a>
+                                }
+                                <form method="post" asp-page-handler="Eliminar" style="display:inline;">
+                                    <input type="hidden" name="id" value="@ingreso.Id_ingreso" />
+                                    <button type="submit" id="boton-borrar"><img src="img/trash.svg"/></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="sin-ingresos" colspan="6">No hay ingresos registrados.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <section id="paginas">
+            <a class="paginado" id="pag-prev" onclick="paginaAtras()"><</a>
+            @for(int i = 1; i <= (ViewData["CantidadPaginas"] as int?); i++)
+                {
+                    <a class="paginado num-pag" onclick="cargarPagina(@i)">@i</a>
+                }
+            <a class="paginado" id="pag-sig" onclick="paginaSiguiente()">></a>
+        </section>
+    </section>
+</section>

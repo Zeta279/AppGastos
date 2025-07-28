@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@using AppGastos.Models
+@using AppGastos.Data
+@{
+    ViewData["Title"] = "Página principal";
+}
+
+<section class="section-main-index">
+    <h1 class="h1-main">Registro de ingresos</h3>
+    <section class="section-main">
+        <section class="section-registro">
+            <p>Ingresos:</p>
+            <p>@ViewData["CantIngresos"]</p>
+        </section>
+
+        <section class="section-registro">
+            <p>Egresos:</p>
+            <p>@ViewData["CantEgresos"]</p>
+        </section>
+
+        <section class="section-registro">
+            <p>Balance:</p>
+            <p>@ViewData["Balance"]</p>
+        </section>
+    </section>
+    <section>
+        @if(ViewData["Ingresos"] != null && (ViewData["Ingresos"] as List<Ingreso>).Count == 0)
+        {
+        <form method="post">
+            <input type="submit" value="Recargar">
+        </form>
+        }
+        <a asp-page="Ingresos/Index" class="boton-ingresos boton">Ver ingresos</a>
+    </section>
+</section>
