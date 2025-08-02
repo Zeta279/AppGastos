@@ -157,12 +157,6 @@ namespace AppGastos.Pages
             ViewData["Tipos"] = _context.Tipo.ToList();
         }
 
-        public IActionResult OnGetProbando()
-        {
-            var Message = "Probando la acción GET";
-            return new JsonResult(new { message = Message });
-        }
-
         public IActionResult OnPost()
         {
             // Método para añadir un nuevo ingreso

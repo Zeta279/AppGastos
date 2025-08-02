@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sAnzHIixU0Y=",
+  "dgSpecHash": "JKicnhH7sm4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\AppGastos.csproj",
+  "projectFilePath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.6\\microsoft.data.sqlite.core.9.0.6.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.6\\microsoft.entityframeworkcore.9.0.6.nupkg.sha512",

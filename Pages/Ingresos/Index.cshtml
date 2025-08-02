@@ -260,15 +260,27 @@
                             <td class="table-acciones">
                                 @if(ingreso.Empresa == null)
                                 {
-                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', null, @ingreso.Id_tipo, @ingreso.Monto, '@ingreso.Descripcion')"><img src="img/pen.svg"></a>
+                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', null, @ingreso.Id_tipo, @ingreso.Monto, '@ingreso.Descripcion')">
+                                        <svg viewBox="0 0 16 16">
+                                            <use xlink:href="img/pen.svg"/>
+                                        </svg>
+                                    </a>
                                 }
                                 else
                                 {
-                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', @ingreso.Id_empresa, @ingreso.Id_tipo, @ingreso.Monto.ToString().Replace(",", "."), '@ingreso.Descripcion')"><img src="img/pen.svg"></a>
+                                    <a href="#" onclick="editarDatoTabla(@ingreso.Id_ingreso, '@ingreso.Fecha.ToString("yyyy-MM-dd")', @ingreso.Id_empresa, @ingreso.Id_tipo, @ingreso.Monto.ToString().Replace(",", "."), '@ingreso.Descripcion')">
+                                        <svg viewBox="0 0 16 16">
+                                            <use xlink:href="img/pen.svg"/>
+                                        </svg>
+                                    </a>
                                 }
                                 <form method="post" asp-page-handler="Eliminar" style="display:inline;">
                                     <input type="hidden" name="id" value="@ingreso.Id_ingreso" />
-                                    <button type="submit" id="boton-borrar"><img src="img/trash.svg"/></button>
+                                    <button type="submit" class="boton-borrar">
+                                        <svg viewBox="0 0 16 16">
+                                            <use xlink:href="img/trash.svg"/>
+                                        </svg>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

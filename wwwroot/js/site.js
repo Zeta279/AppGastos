@@ -1,7 +1,9 @@
 ﻿$(function(){
     $("#probar").on("click", function(){
-        $.get("Probando", function(data){
-            console.log(data);
+        $.get("api/ingresos", function(data){
+            for(let x of data){
+                console.log(x);
+            }
         });
     });
 });

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\AppGastos.csproj": {}
+    "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\AppGastos.csproj": {
+    "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\AppGastos.csproj",
+        "projectUniqueName": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos.csproj",
         "projectName": "AppGastos",
-        "projectPath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\AppGastos.csproj",
+        "projectPath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos.csproj",
         "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\AppGastos\\obj\\",
+        "outputPath": "C:\\Users\\Windows\\Desktop\\Lenguajes\\C#\\AppGastos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,10 +1,18 @@
 using AppGastos.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Add API Controller support
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        });
 
 // Database context
 builder.Services.AddDbContext<AppGastosContext>(options =>
@@ -26,7 +34,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllers();
+
 app.MapStaticAssets();
+
 app.MapRazorPages()
    .WithStaticAssets();
 

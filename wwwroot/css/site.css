@@ -456,10 +456,6 @@ form #boton-editar{
     padding-top: 30px;
 }
 
-#pedido-radio input{
-    margin-left: 10px;
-}
-
 .section-campos{
     display: flex;
     justify-content: space-between;
@@ -475,10 +471,33 @@ form #boton-editar{
     box-sizing: border-box;
 }
 
-#boton-borrar{
+.boton-borrar{
     border: 0;
-    background-color: white;
     cursor: pointer;
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+}
+
+.boton-borrar svg{
+    color: white;
+    vertical-align: middle;
+}
+
+.table-acciones a{
+    background-color: #1e3799;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.table-acciones a svg{
+    vertical-align: middle;
+}
+
+.table-main svg{
+    width: 20px;
+    padding: 7px;
+    fill: white;
 }
 
 #paginas{
