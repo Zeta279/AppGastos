@@ -59,8 +59,7 @@
     <section class="section-ingresos">
         <section class="sec-ingresos-2">
 
-            <form method="get" id="form-buscar">
-                <label for="filtro">Buscar por: </label>
+            <label for="filtro">Buscar por: </label>
                 <select name="filtro" id="filtro">
                     <option value="fecha">Fecha</option>
                     <option value="empresa">Empresa</option>
@@ -74,7 +73,6 @@
                         <img src="img/search.svg"/>
                     </button>
                 </section>
-            </form>
 
             <section class="nuevo-ingreso boton" onclick="mostrarIngresoNuevo()">
                 <svg viewBox="0 0 16 16">
@@ -84,8 +82,6 @@
             </section>
 
         </section>
-
-        <button id="probar">Probando</button>
 
         @if(!String.IsNullOrEmpty(ViewData["Buscando"] as string))
         {
@@ -99,7 +95,7 @@
             <p>Ordenando por: @ViewData["Orden"]</p>
         </section>
 
-        <table id="table-ingresos" class="table-main">
+        <table id="table-ingresos">
             <thead>
                 <tr>
                     <th class="table-fecha">
@@ -218,18 +214,27 @@
                             {
                                 @if(ingreso.Id_empresa == 1)
                                 {
-                                    <td class="fila-correo table-empresa">
+                                    <td class="fila-correo fila-empresa table-empresa">
                                         <section>
                                             <img src="img/correoarg.jpg">
                                             <p>@ingreso.Empresa</p>
                                         </section>
                                     </td>
                                 }
-                                else
+                                else if(ingreso.Id_empresa == 2)
                                 {
-                                    <td class="fila-andreani table-empresa">
+                                    <td class="fila-andreani fila-empresa table-empresa">
                                         <section>
                                             <img src="img/andreani.png">
+                                            <p>@ingreso.Empresa</p>
+                                        </section>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="fila-mercado-libre fila-empresa table-empresa">
+                                        <section>
+                                            <img src="img/mercado-libre.png">
                                             <p>@ingreso.Empresa</p>
                                         </section>
                                     </td>
@@ -244,18 +249,19 @@
                             {
                                 <td class="ingreso-negativo table-monto">- @float.Abs(ingreso.Monto).ToString("C")</td>
                             }
-                            <td class="table-descripcion">@if(ingreso.Descripcion == "")
+                            <td class="table-descripcion">
+                            @if(ingreso.Descripcion == "")
+                            {
+                                <i class="sin-desc">Sin descripción</i>
+                            }
+                            else
+                            {
+                                <p class="desc-corta">@Model.Recortar(ingreso.Descripcion, 20)</p>
+                                if(ingreso.Descripcion.Length > 20)
                                 {
-                                    <i class="sin-desc">Sin descripción</i>
+                                    <p class="desc-larga">@ingreso.Descripcion</p>
                                 }
-                                else
-                                {
-                                    <p class="desc-corta">@Model.Recortar(ingreso.Descripcion, 20)</p>
-                                    if(ingreso.Descripcion.Length > 20)
-                                    {
-                                        <p class="desc-larga">@ingreso.Descripcion</p>
-                                    }
-                                }
+                            }
                             </td>
                             <td class="table-acciones">
                                 @if(ingreso.Empresa == null)

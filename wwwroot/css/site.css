@@ -108,34 +108,6 @@ h2{
     margin: 20px;
 }
 
-.table-main{
-    border: 1px rgb(180, 180, 180) solid;
-    text-align: center;
-    border-collapse: collapse;
-}
-
-.table-main tr{
-    border-bottom: 1px rgb(226, 226, 226) solid;
-}
-
-.table-main td{
-    padding: 15px 0;
-}
-
-.table-main tr:last-child{
-    border-bottom: 0;
-}
-
-.table-main th{
-    background-color: rgb(231, 231, 231);
-    padding: 10px 0;
-}
-
-#table-main-page{
-    margin: auto;
-    max-width: 700px;
-}
-
 .sin-ingresos{
     text-align: center;
 }
@@ -192,7 +164,13 @@ input{
     color: white;
 }
 
-.fila-correo section, .fila-andreani section{
+.fila-mercado-libre section{
+    background-color: white;
+    color: rgb(0, 13, 143);
+    border: 2px rgb(255, 197, 0) solid;
+}
+
+.fila-empresa section{
     border-radius: 15px;
     padding: 10px;
     width: fit-content;
@@ -202,15 +180,14 @@ input{
     font-weight: bold;
 }
 
-.fila-correo img, .fila-andreani img{
+.fila-empresa img{
     height: fit-content;
     display: inline-block;
     width: 25px;
 }
 
-.fila-correo p, .fila-andreani p{
-    display: inline-block;
-    padding-right: 2px;
+.fila-empresa p{
+    padding-right: 4px;
 }
 
 .ordenar{
@@ -240,9 +217,35 @@ input{
 }
 
 #table-ingresos{
+    border: 1px rgb(180, 180, 180) solid;
+    text-align: center;
+    border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
     margin-top: 20px;
+}
+
+#table-ingresos tr{
+    border-bottom: 1px rgb(226, 226, 226) solid;
+}
+
+#table-ingresos td{
+    padding: 15px 0;
+}
+
+#table-ingresos tr:last-child{
+    border-bottom: 0;
+}
+
+#table-ingresos th{
+    background-color: rgb(231, 231, 231);
+    padding: 10px 0;
+}
+
+#table-ingresos svg{
+    width: 20px;
+    padding: 7px;
+    fill: white;
 }
 
 #table-ingresos tbody tr:hover{
@@ -492,12 +495,6 @@ form #boton-editar{
 
 .table-acciones a svg{
     vertical-align: middle;
-}
-
-.table-main svg{
-    width: 20px;
-    padding: 7px;
-    fill: white;
 }
 
 #paginas{

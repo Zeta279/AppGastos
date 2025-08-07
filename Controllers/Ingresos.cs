@@ -23,6 +23,22 @@ namespace MyApp.Namespace
             var ingreso = _context.Ingreso
                 .Include(i => i.Empresa)
                 .Include(i => i.Tipo)
+                .OrderByDescending(i => i.Fecha)
+                .Take(10)
+                .ToList();
+
+            return ingreso;
+        }
+
+        [HttpGet("page/{page}")]
+        public List<Ingreso> GetByPage(int page)
+        {
+            var ingreso = _context.Ingreso
+                .Include(i => i.Empresa)
+                .Include(i => i.Tipo)
+                .OrderByDescending(i => i.Fecha)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
             return ingreso;
@@ -90,7 +106,7 @@ namespace MyApp.Namespace
                 }
             }
 
-            return ingreso.ToList();
+            return ingreso.Take(10).ToList();
         }
     }
 }

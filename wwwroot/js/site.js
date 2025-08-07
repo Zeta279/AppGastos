@@ -1,12 +1,135 @@
 ﻿$(function(){
-    $("#probar").on("click", function(){
-        $.get("api/ingresos", function(data){
-            for(let x of data){
-                console.log(x);
-            }
+    $("#buscar").on("click", function(){
+        let filtro = "Descripcion";
+        let busqueda = $("#input-busqueda input").val();
+
+        $.get("api/ingresos/filter?filtro=" + filtro + "&Busqueda1=" + busqueda, function(ingresos){
+            mostrarDatos(ingresos);
         });
     });
 });
+
+// Datos de la tabla
+function mostrarDatos(ingresos){
+    $("#table-ingresos tbody tr").remove();
+    let lista = $("#table-ingresos tbody");
+    for(let ingreso of ingresos){
+        // Fila
+        let fila = $("<tr>");
+
+        // ID
+        fila.attr("id", ingreso.id_ingreso);
+
+        // Mostrar descripción
+        fila.on("click", function(){
+            mostrarDesc(ingreso.id_ingreso);
+        });
+
+        // Fecha
+        let fechaObj = new Date(ingreso.fecha);
+        let fechaFormateada = String(fechaObj.getDate()) + "/" +
+            String(fechaObj.getMonth() + 1) + "/" +
+            fechaObj.getFullYear();
+
+        let fecha = $("<td class='table-fecha'>" + fechaFormateada + "</td>");
+        fila.append(fecha);
+
+        // Empresa
+        let empresa;
+        if(ingreso.id_empresa == null){
+            empresa = $("<td class='table-empresa'>-</td>");
+        }
+        else{
+            if(ingreso.id_empresa == 1){
+                empresa = $(
+                    `<td class="fila-correo fila-empresa table-empresa">
+                        <section>
+                            <img src="img/correoarg.jpg">
+                            <p>`+ ingreso.empresa.nombre + `</p>
+                        </section>
+                    </td>`
+                )
+            }
+            else if(ingreso.id_empresa == 2){
+                empresa = $(
+                    `<td class="fila-andreani fila-empresa table-empresa">
+                        <section>
+                            <img src="img/andreani.png">
+                            <p>` + ingreso.empresa.nombre + `</p>
+                        </section>
+                    </td>`
+                );
+            }
+            else{
+                empresa = $(
+                    `<td class="fila-mercado-libre fila-empresa table-empresa">
+                        <section>
+                            <img src="img/mercado-libre.png">
+                            <p>` + ingreso.empresa.nombre + `</p>
+                        </section>
+                    </td>`
+                );
+            }
+        }
+
+        fila.append(empresa);
+
+        // Tipo
+        let tipo = $("<td class='table-tipo'>" + ingreso.tipo.nombre + "</td>");
+        fila.append(tipo);
+
+        // Monto
+        let monto;
+        let montoFormateado = Math.abs(parseFloat(ingreso.monto)).toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        if(ingreso.monto > 0){
+            monto = $("<td class='ingreso-positivo table-monto'>+ $ " + montoFormateado + "</td>");
+        }
+        else{
+            monto = $("<td class='ingreso-negativo table-monto'>- $ " + montoFormateado + "</td>");
+        }
+
+        fila.append(monto);
+
+        // Descripción
+        let descripcion;
+
+        if(ingreso.descripcion == ""){
+            descripcion = $("<td class='table-descripcion'><i class='sin-desc'>Sin descripción</i></td>");
+        }
+        else{
+            if(ingreso.descripcion.length > 20){
+                descripcion = $("<td class='table-descripcion'><p class='desc-corta'>" + String(ingreso.descripcion).slice(0, 20) + "</p><p class='desc-larga'>" + ingreso.descripcion + "</p></td>");
+            }
+            else{
+                descripcion = $("<td class='table-descripcion'><p class='desc-corta'>" + ingreso.descripcion + "</p></td>");
+            }
+        }
+
+        fila.append(descripcion);
+
+        // Acciones
+        let acciones = $(`<td class="table-acciones">
+            <a href="#" onclick="editarDatoTabla(` + ingreso.id_ingreso + `, '` + String(ingreso.fecha).slice(0, 10) + `', ` + ingreso.id_empresa + `, ` + ingreso.id_tipo + `, ` + ingreso.monto + `, '` + ingreso.descripcion + `')">
+                <svg viewBox="0 0 16 16">
+                    <use xlink:href="img/pen.svg"/>
+                </svg>
+            </a>
+            <form method="post" asp-page-handler="Eliminar" style="display:inline;">
+                <input type="hidden" name="id" value="` + ingreso.id_ingreso + `" />
+                <button type="submit" class="boton-borrar">
+                    <svg viewBox="0 0 16 16">
+                        <use xlink:href="img/trash.svg"/>
+                    </svg>
+                </button>
+            </form>
+            </td>`);
+
+        fila.append(acciones);
+
+        lista.append(fila);
+    }
+}
 
 // Ocultar el form de nuevo ingreso
 function ocultarIngresoNuevo(){
@@ -64,7 +187,7 @@ function editarDatoTabla(id_ingreso, fechaForm, id_empresa, id_tipo, montoForm, 
 // Controlar el campo "empresa" al seleccionar el tipo
 function tipoCheck(){
     for(let x of tipo.children){
-        if(x.value == 2 && x.selected){
+        if(x.value == 4 && x.selected){
             empresaSelect.children[0].selected = true;
             empresaSelect.disabled = true;
             return;
